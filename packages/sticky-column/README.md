@@ -1,4 +1,4 @@
-# @table-utils/sticky
+# @table-utils/sticky-column
 
 > This is not a `position: sticky` polyfill.
 
@@ -6,15 +6,15 @@ A tiny zero-dependency sticky style function designed to work with "stuck" table
 
 ## The Problem
 
-HTML tables work well with `position: sticky` with vertical scrolling, but what about horizontal scrolling? This is where this tiny module come sin and lends a helping hand. By calculating the width of the current cell and setting the next cell's `left` CSS property equal to the previous cell's width.
+HTML tables work well with `position: sticky` with vertical scrolling, but what about horizontal scrolling? What if you want multiple sticky columns? `@table-utils/sticky-column` aims to solve this problem in a technology-agnostic manner
 
 ## Usage
 
 ```sh
-npm i @table-utils/sticky
+npm i @table-utils/sticky-column
 
 # or with yarn
-yarn add @table-utils/sticky
+yarn add @table-utils/sticky-column
 ```
 
 Add a little CSS:
@@ -36,7 +36,7 @@ table td.pinned {
 Call the function in your code:
 
 ```js
-import { stickyColumn } from "@table-utils/sticky";
+import { stickyColumn } from "@table-utils/sticky-column";
 
 // that's it!
 stickyColumn(document.getElementById("my-table"));
@@ -62,7 +62,7 @@ Usage with React is super easy. Just pass it into a `React.useLayoutEffect`:
 
 ```jsx
 import * as React from "react";
-import { stickyColumn } from "@table-utils/sticky";
+import { stickyColumn } from "@table-utils/sticky-column";
 
 function App() {
     const ref = React.useRef();
@@ -94,4 +94,8 @@ function App() {
 
 ## Performance
 
-The algorithm used is relatively fast because the algorithm works with _contiguous_ columns; however, the main drawback is applying
+The algorithm used is relatively fast because the algorithm works with _contiguous_ columns; however, as tables grow large, there will be a slowdown when computing the width of cells. To help with performance of large tables, DOM reads and writes are batched.
+
+## Limitations
+
+Currently there's no support for virtualized tables.
