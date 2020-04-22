@@ -1,0 +1,4 @@
+test/*.js*
+pkg/
+.DS_Store
+assets/*.css*

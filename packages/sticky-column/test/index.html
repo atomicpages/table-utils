@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Test</title>
+        <meta charset="utf-8" />
+        <style type="text/css">
+            :root {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .wrapper {
+                height: 300px;
+                width: 400px;
+                overflow: auto;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th {
+                text-align: left;
+                position: sticky;
+                top: 0;
+            }
+            .pinned {
+                position: sticky;
+                left: 0;
+                background-color: #ddd;
+                min-height: 0;
+            }
+        </style>
+        <script src="/index.js"></script>
+        <script>
+            function generate(rows = 20) {
+                const fragment = document.createDocumentFragment();
+
+                for (let i = 0; i < rows; i++) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td class="pinned">John Doe</td>
+                        <td>42</td>
+                        <td>Male</td>
+                        <td>000-000-0000</td>
+                        <td>johndoe@foo.com</td>
+                        <td>123 Sleepytime Ln.</td>
+                        <td>San Francisco</td>
+                        <td>California</td>
+                        <td>12345</td>`;
+
+                    fragment.appendChild(tr);
+                }
+
+                return fragment;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <table id="root">
+                <thead>
+                    <tr>
+                        <th class="pinned">Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone Number</th>
+                        <th>Email Address</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            document.querySelector('tbody').appendChild(generate(5000));
+            StickyColumn.stickyColumn(document.getElementById('root'));
+        </script>
+    </body>
+</html>
