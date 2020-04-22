@@ -36,39 +36,39 @@ table td.pinned {
 Call the function in your code:
 
 ```js
-import { stickyColumn } from '@table-utils/sticky';
+import { stickyColumn } from "@table-utils/sticky";
 
 // that's it!
-stickyColumn(document.getElementById('my-table'));
+stickyColumn(document.getElementById("my-table"));
 ```
 
 ## API
 
 The function has a very simple API:
 
-| Name                      | Required | Type                    | Default  | Description                                         |
-| ------------------------- | -------- | ----------------------- | -------- | --------------------------------------------------- |
-| `root`                    | Yes      | `HTMLElement`           |          | The base table element                              |
-| `options`                 | No       | `Object`                |          | Optionally pass an object to configure the function |
-| `options.thead`           | No       | `thead | div | section` | `thead`  | The table header element                            |
-| `options.tr`              | No       | `tr | div`              | `tr`     | The table row element                               |
-| `options.th`              | No       | `th | div`              | `th`     | The table header cell element                       |
-| `options.stickyClassName` | No       | `string`                | `pinned` | The class attribute value of the pinned cell        |
-| `options.contiguous`      | No       | `boolean`               | `true`   | Set false to traverse the entire table              |
+| Name                      | Required | Type                      | Default  | Description                                         |
+| ------------------------- | -------- | ------------------------- | -------- | --------------------------------------------------- |
+| `root`                    | Yes      | `HTMLElement`             |          | The base table element                              |
+| `options`                 | No       | `Object`                  |          | Optionally pass an object to configure the function |
+| `options.thead`           | No       | `thead \| div \| section` | `thead`  | The table header element                            |
+| `options.tr`              | No       | `tr \| div`               | `tr`     | The table row element                               |
+| `options.th`              | No       | `th \| div`               | `th`     | The table header cell element                       |
+| `options.stickyClassName` | No       | `string`                  | `pinned` | The class attribute value of the pinned cell        |
+| `options.contiguous`      | No       | `boolean`                 | `true`   | Set false to traverse the entire table              |
 
 ## Usage with React
 
 Usage with React is super easy. Just pass it into a `React.useLayoutEffect`:
 
 ```jsx
-import * as React from 'react';
-import { stickyColumn } from '@table-utils/sticky';
+import * as React from "react";
+import { stickyColumn } from "@table-utils/sticky";
 
 function App() {
     const ref = React.useRef();
 
     React.useLayoutEffect(() => {
-        stickyColumn(ref.current, { className: 'sticky' });
+        stickyColumn(ref.current, { className: "sticky" });
     }, []);
 
     return (
