@@ -20,8 +20,13 @@
                 text-align: left;
                 position: sticky;
                 top: 0;
+                z-index: 10;
+                background-color: white;
             }
-            .pinned {
+            th.sticky {
+                z-index: 11;
+            }
+            .sticky {
                 position: sticky;
                 left: 0;
                 background-color: #ddd;
@@ -30,14 +35,17 @@
         </style>
         <script src="/index.js"></script>
         <script>
-            function generate(rows = 20) {
+            function generate(rows = 20, sticky = []) {
+                const start = new Date().getTime();
                 const fragment = document.createDocumentFragment();
 
                 for (let i = 0; i < rows; i++) {
                     const tr = document.createElement('tr');
-                    tr.innerHTML = `<td class="pinned">John Doe</td>
-                        <td>42</td>
-                        <td>Male</td>
+                    tr.innerHTML = `<td class="${
+                        sticky.indexOf(0) !== -1 ? 'sticky scl0' : ''
+                    }">John Doe</td>
+                        <td class="${sticky.indexOf(1) !== -1 ? 'sticky scl1' : ''}">42</td>
+                        <td class="${sticky.indexOf(2) !== -1 ? 'sticky scl2' : ''}">Male</td>
                         <td>000-000-0000</td>
                         <td>johndoe@foo.com</td>
                         <td>123 Sleepytime Ln.</td>
@@ -48,6 +56,10 @@
                     fragment.appendChild(tr);
                 }
 
+                console.log(
+                    `Took ${new Date().getTime() - start}ms to generate ${rows} rows of dummy data`
+                );
+
                 return fragment;
             }
         </script>
@@ -57,9 +69,9 @@
             <table id="root">
                 <thead>
                     <tr>
-                        <th class="pinned">Name</th>
-                        <th>Age</th>
-                        <th>Gender</th>
+                        <th class="sticky scl0">Name</th>
+                        <th class="sticky scl1">Age</th>
+                        <th class="sticky scl2">Gender</th>
                         <th>Phone Number</th>
                         <th>Email Address</th>
                         <th>Address</th>
@@ -68,13 +80,19 @@
                         <th>Zip</th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
         <script>
-            document.querySelector('tbody').appendChild(generate(5000));
-            StickyColumn.stickyColumn(document.getElementById('root'));
+            document.querySelector('tbody').appendChild(generate(20000, [0, 1, 2]));
+
+            // wait for DCL before executing
+            window.addEventListener('DOMContentLoaded', () => {
+                StickyColumn.stickyColumn(document.getElementById('root'), {
+                    globalStylePrefix: 'scl',
+                    selfAddClassName: true,
+                });
+            });
         </script>
     </body>
 </html>

@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "None",
+        "target": "ES5",
+        "jsx": "react",
+        "lib": ["ES2015", "DOM"]
+    },
+    "include": ["./*.tsx"]
+}

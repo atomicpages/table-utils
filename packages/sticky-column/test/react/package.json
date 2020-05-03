@@ -1,0 +1,12 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+      "build": "../../node_modules/.bin/tsc --jsx react --lib es2015 --lib dom -t ES5 react_test.tsx",
+      "pretest": "npm run build",
+      "test": "something && npm run posttest",
+      "posttest": "rm react_test.js"
+  }
+}

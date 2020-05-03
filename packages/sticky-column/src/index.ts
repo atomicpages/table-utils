@@ -1,97 +1,76 @@
+import {
+    createGlobalStyles,
+    addClassNamesToStickyCells,
+    addInlineStylesToStickyCells,
+    getStickyCellWidths,
+} from './utils';
+
+import { sticky } from './sticky';
+
 export type Options = {
     /**
      * The selector of the table row element.
-     * You can use any valid CSS selector.
+     * You can use any valid CSS selector. Avoid
+     * generic selectors like `div`.
      */
-    tr?: 'tr' | 'div' | string;
+    tr?: 'tr' | string;
 
     /**
      * The selector of the table head element.
-     * You can use any valid CSS selector.
+     * You can use any valid CSS selector. Avoid
+     * generic selectors like `div` or `section`.
      */
-    thead?: 'thead' | 'div' | 'section' | string;
+    thead?: 'thead' | string;
+
+    /**
+     * The selector of the tbody element.
+     * You can use any valid CSS selector. Avoid
+     * generic selectors like `div` or `section`.
+     */
+    tbody?: 'tbody' | string;
 
     /**
      * The selector of the table header cell element.
-     * You can use any valid CSS selector.
+     * You can use any valid CSS selector. Avoid
+     * generic selectors like `div`.
      */
-    th?: 'th' | 'div' | string;
+    th?: 'th' | string;
 
     /**
-     * The sticky class name. Defaults to `pinned`
+     * The sticky class name. Defaults to `sticky`.
      */
     stickyClassName?: string;
 
     /**
-     * Break on the first cell that doesn't contain
-     * `options.stickyClassName`.
+     * Set the global style prefix and add
+     * an internal stylesheet to `document.head`.
      */
-    contiguous?: boolean;
+    globalStylePrefix?: string;
+
+    /**
+     * Set true to let stick-column know you'll
+     * add `globalStylePrefix` to the cells yourself.
+     */
+    selfAddClassName?: boolean;
 };
 
-const tableWalker = (
-    root: HTMLElement,
-    opts: Options,
-    cb: (child: HTMLElement, i: number) => void
-) => {
-    const tr = root.querySelectorAll(opts.tr);
-    let children: HTMLCollection;
-    let child: HTMLElement;
-
-    for (let i = 0; i < tr.length; i++) {
-        children = tr[i].children;
-
-        for (let j = 0; j < children.length; j++) {
-            child = children[j] as HTMLElement;
-
-            if (child.className.indexOf(opts.stickyClassName) !== -1 || !opts.contiguous) {
-                cb(child, j);
-            } else {
-                break;
-            }
-        }
-    }
-};
-
-const getStickyCellWidths = (root: HTMLElement, opts: Options) => {
-    const widths: Record<number, number> = { 0: 0 };
-    let left = 0;
-
-    tableWalker(root, opts, (child, j) => {
-        if (widths[j + 1] === undefined) {
-            left += child.offsetWidth;
-            widths[j + 1] = left;
-        }
-    });
-
-    return widths;
-};
-
-const setStyles = (root: HTMLElement, opts: Options, widths: Record<number, number>) => {
-    tableWalker(root, opts, (child, j) => {
-        if (widths[j] !== undefined) {
-            child.style.left = `${widths[j]}px`;
-        }
-    });
-};
+export type CellWidths = Record<number | 'length', number>;
 
 export const stickyColumn = (root: HTMLElement, options?: Options) => {
-    const opts = {
-        tr: 'tr',
-        thead: 'thead',
-        th: 'th',
-        stickyClassName: 'pinned',
-        contiguous: true,
-        ...options,
-    };
-
-    let stickyCellWidths: Record<number, number>;
+    let cleanup: Function;
 
     requestAnimationFrame(() => {
-        stickyCellWidths = getStickyCellWidths(root, opts);
+        cleanup = sticky(root, options).cleanup;
     });
 
-    requestAnimationFrame(() => {
-        setStyles(root, opts, stickyCellWidths);
-    });
+    return { cleanup };
+};
+
+stickyColumn.sync = sticky;
+
+export {
+    createGlobalStyles,
+    addClassNamesToStickyCells,
+    addInlineStylesToStickyCells,
+    getStickyCellWidths,
 };

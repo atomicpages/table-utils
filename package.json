@@ -13,5 +13,6 @@
         "@djthoms/prettier-config": "^2.0.0",
         "lerna": "^3.20.2",
         "prettier": "^2.0.5"
-    }
+    },
+    "prettier": "@djthoms/prettier-config"
 }
