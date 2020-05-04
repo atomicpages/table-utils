@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sticky tests should tolerate . in the stickyClassName 1`] = `
+<div>
+  <table>
+    <thead>
+      
+    
+      <tr>
+        
+        
+        <th
+          class="sticky"
+          style="left: 0px;"
+        >
+          Name
+        </th>
+        
+        
+        <th
+          class="sticky"
+          style="left: 0px;"
+        >
+          Age
+        </th>
+        
+        
+        <th
+          class=""
+        >
+          Gender
+        </th>
+        
+        
+        <th
+          class=""
+        >
+          Phone Number
+        </th>
+        
+        
+        <th>
+          Email Address
+        </th>
+        
+        
+        <th>
+          Address
+        </th>
+        
+        
+        <th>
+          City
+        </th>
+        
+        
+        <th>
+          State
+        </th>
+        
+        
+        <th>
+          Zip
+        </th>
+        
+    
+      </tr>
+      
+
+    </thead>
+    
+
+    <tbody />
+    <tr>
+      <td
+        class="sticky"
+        style="left: 0px;"
+      >
+        John Doe
+      </td>
+      
+            
+      <td
+        class="sticky"
+        style="left: 0px;"
+      >
+        42
+      </td>
+      
+            
+      <td
+        class=""
+      >
+        Male
+      </td>
+      
+            
+    </tr>
+    <tr>
+      <td
+        class="sticky"
+        style="left: 0px;"
+      >
+        John Doe
+      </td>
+      
+            
+      <td
+        class="sticky"
+        style="left: 0px;"
+      >
+        42
+      </td>
+      
+            
+      <td
+        class=""
+      >
+        Male
+      </td>
+      
+            
+    </tr>
+  </table>
+</div>
+`;

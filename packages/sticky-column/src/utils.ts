@@ -45,6 +45,7 @@ export const addInlineStylesToStickyCells = (
     widths: CellWidths
 ) => {
     if (widths.length > 1) {
+        // TODO: make it work with `div` tables too
         const stickyCells = root.querySelectorAll(`.${options.stickyClassName}`);
 
         const len = stickyCells.length;
@@ -63,21 +64,17 @@ export const getStickyCellWidths = (root: HTMLElement, opts: Options): CellWidth
 
     const th = root.querySelectorAll(`${opts.thead} ${opts.th}`);
 
-    if (th.length > 1) {
-        let child: HTMLElement;
+    let child: HTMLElement;
 
-        for (let i = 0; i < th.length; i++) {
-            child = th[i] as HTMLElement;
+    for (let i = 0; i < th.length; i++) {
+        child = th[i] as HTMLElement;
 
-            if (child.className.indexOf(opts.stickyClassName) !== -1) {
-                if (widths[i + 1] === undefined) {
-                    left += child.offsetWidth;
-                    widths[i + 1] = left;
-                    widths.length++;
-                }
-            } else {
-                break;
-            }
+        if (child.className.indexOf(opts.stickyClassName) !== -1) {
+            left += child.offsetWidth;
+            widths[i + 1] = left;
+            widths.length++;
+        } else {
+            break;
         }
     }
 
