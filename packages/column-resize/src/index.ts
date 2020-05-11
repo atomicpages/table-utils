@@ -3,6 +3,11 @@ type Options = {
      * Pass in a custom selector that's used to find the table header.
      */
     th: 'th' | 'div' | string;
+
+    /**
+     * Set the direction to RTL.
+     */
+    rtl?: boolean;
 };
 
 export function columnResize(root: HTMLElement, options?: Options) {
@@ -12,14 +17,17 @@ export function columnResize(root: HTMLElement, options?: Options) {
     let pressed = false;
 
     const opts = {
-        tableHeaderCell: 'th',
+        th: 'th',
         ...options,
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-        if (pressed) {
-            // @ts-ignore
-            handle.width = startWidth + (e.pageX - startX);
+        if (pressed && handle) {
+            if (opts.rtl) {
+                handle.style.width = `${startWidth - (e.pageX - startX)}px`;
+            } else {
+                handle.style.width = `${startWidth + (e.pageX - startX)}px`;
+            }
         }
     };
 
@@ -33,11 +41,13 @@ export function columnResize(root: HTMLElement, options?: Options) {
     const handleMouseDown = (e: MouseEvent) => {
         pressed = true;
 
-        // @ts-ignore
-        startX = event.pageX;
+        startX = e.pageX;
         handle = (e.target as HTMLElement).closest(opts.th);
-        startWidth = handle.offsetWidth;
-        root.classList.add('resizing');
+
+        if (handle) {
+            startWidth = handle.offsetWidth;
+            root.classList.add('resizing');
+        }
     };
 
     return {

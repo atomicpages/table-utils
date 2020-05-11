@@ -1,0 +1,13 @@
+[role='table'],
+[role='rowgroup'],
+[role='row'] {
+    display: block;
+}
+[role='columnheader'] {
+    font-weight: bold;
+    text-align: center;
+}
+[role='columnheader'],
+[role='cell'] {
+    display: inline-block;
+}

@@ -153,6 +153,21 @@ window.addEventListener('load', () => {
 });
 ```
 
+## Handling Resize
+
+To handle screen size changes, listen on the `resize` event. To prevent unnecessary reflows, we can wrap our sticky column call inside a `setTimeout`. For extra performance gains you can use a [debounce](https://www.npmjs.com/package/debounce) function to prevent unnecessary calls.
+
+```js
+window.addEventListener('resize', () => {
+    setTimeout(() => {
+        StickyColumn.stickyColumn(document.getElementById('root'), {
+            globalStylePrefix: 'slc',
+            selfAddClassName: true,
+        });
+    }, 100);
+});
+```
+
 ## Customizing
 
 sticky-column exports all internal functions so you can integrate with other libraries/frameworks easily. For example, here's how you can integrate with `fastdom`:

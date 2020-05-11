@@ -18,10 +18,10 @@ yarn add @table-utils/column-resize
 Load `.scss` or the pre-compiled `.css`:
 
 ```js
-import { columnResize } from "@table-utils/column-resize";
-import "@table-utils/column-resize/assets/resize.css";
+import { columnResize } from '@table-utils/column-resize';
+import '@table-utils/column-resize/assets/resize.css';
 
-const table = document.getElementById("my-table");
+const table = document.getElementById('my-table');
 const handlers = columnResize(table);
 
 for (const handler in handlers) {
@@ -41,31 +41,37 @@ This allows seamless integration into libraries like React and allows you to hav
 
 ### Options
 
-| Name         | Required | Type          | Default | Description                                         |
-| ------------ | -------- | ------------- | ------- | --------------------------------------------------- |
-| `root`       | Yes      | `HTMLElement` |         | The base table element                              |
-| `options`    | No       | `Object`      |         | Optionally pass an object to configure the function |
-| `options.th` | No       | `th \| div`   | `th`    | The table header cell element                       |
+| Name          | Required | Type          | Default | Description                                         |
+| ------------- | -------- | ------------- | ------- | --------------------------------------------------- |
+| `root`        | Yes      | `HTMLElement` |         | The base table element                              |
+| `options`     | No       | `Object`      |         | Optionally pass an object to configure the function |
+| `options.th`  | No       | `th \| div`   | `th`    | The table header cell element                       |
+| `options.rtl` | No       | `boolean`     |         | Set column resize to RTL mode                       |
 
 ### CSS Customization
 
 By default the CSS assumes a standard HTML table is used. A few variables are exposed which allow for customization:
 
 ```scss
-$table: ".rt-table";
-$table-header-cell: ".rt__table__header";
-$table-cell: ".rt-table__body__cell";
+$table: '.rt-table';
+$table-header-cell: '.rt__table__header';
+$table-cell: '.rt-table__body__cell';
 
-@import "~@table-utils/column-resize/assets/resize.scss";
+// works with webpack (via sass-loader)
+@import '~@table-utils/column-resize/assets/resize.scss';
 ```
+
+### Working with `div` tables
+
+Working with `div` tables requires some finesse &ndash; mainly correct CSS.
 
 ## Usage with React
 
 Since this tiny package doesn't attach the event handlers, you can use an effect to hook things up:
 
 ```jsx
-import * as React from "react";
-import { columnResize } from "@table-utils/column-resize";
+import * as React from 'react';
+import { columnResize } from '@table-utils/column-resize';
 
 function App() {
     const ref = React.useRef();

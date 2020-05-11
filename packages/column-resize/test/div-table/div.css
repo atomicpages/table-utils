@@ -1,0 +1,33 @@
+[role=table] [role=columnheader] span::before, [role=table].resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+
+[role=table] [role=columnheader] {
+  padding: 0 !important;
+}
+[role=table] [role=columnheader] span {
+  position: relative;
+  display: block;
+  padding: 10px;
+}
+[role=table] [role=columnheader] span::before {
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1em;
+}
+[role=table] [role=columnheader]:last-of-type::before {
+  display: none;
+}
+[role=table] [role=cell] {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*# sourceMappingURL=div.css.map */

@@ -1,12 +1,32 @@
 {
-  "name": "react",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-      "build": "../../node_modules/.bin/tsc --jsx react --lib es2015 --lib dom -t ES5 react_test.tsx",
-      "pretest": "npm run build",
-      "test": "something && npm run posttest",
-      "posttest": "rm react_test.js"
-  }
+    "name": "react",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "prebuild": "",
+        "build": "../../node_modules/.bin/pika-pack build",
+        "pretest": "npm run build && mkdir dist && cp pkg/dist-browser/index.js public/index.html dist",
+        "test": "something && npm run posttest",
+        "posttest": "rm -rf pkg dist src/sc.js"
+    },
+    "@pika/pack": {
+        "pipeline": [
+            [
+                "@pika/plugin-ts-standard-pkg"
+            ],
+            [
+                "pika-plugin-legacy-browser",
+                {
+                    "name": "ReactTest",
+                    "sourcemap": false,
+                    "minify": false,
+                    "external": [
+                        "react",
+                        "react-dom"
+                    ]
+                }
+            ]
+        ]
+    }
 }

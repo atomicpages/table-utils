@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Column Resize Demo</title>
+        <link rel="stylesheet" href="div.css" />
+        <link rel="stylesheet" id="table-styles" href="table.css" />
+        <link rel="stylesheet" id="block-styles" href="block.css" disabled="disabled" />
+        <script>
+            function generate(rows = 20) {
+                const start = new Date().getTime();
+                const fragment = document.createDocumentFragment();
+
+                for (let i = 0; i < rows; i++) {
+                    const tr = document.createElement('div');
+                    tr.setAttribute('role', 'row');
+                    tr.setAttribute('aria-rowindex', i);
+
+                    tr.innerHTML = `<div role="cell">John Doe</div>
+                        <div role="cell">42</div>
+                        <div role="cell">Male</div>
+                        <div role="cell">000-000-0000</div>
+                        <div role="cell">johndoe@foo.com</div>
+                        <div role="cell">123 Sleepytime Ln.</div>
+                        <div role="cell">San Francisco</div>
+                        <div role="cell">California</div>
+                        <div role="cell">12345</div>`;
+
+                    fragment.appendChild(tr);
+                }
+
+                console.log(
+                    `Took ${new Date().getTime() - start}ms to generate ${rows} rows of dummy data`
+                );
+
+                return fragment;
+            }
+        </script>
+    </head>
+    <body>
+        <button>Toggle Block Styles</button>
+        <div class="wrapper">
+            <div id="root" role="table">
+                <section role="rowgroup">
+                    <div role="row">
+                        <div role="columnheader"><span>Name</span></div>
+                        <div role="columnheader"><span>Age</span></div>
+                        <div role="columnheader"><span>Gender</span></div>
+                        <div role="columnheader">Phone Number</div>
+                        <div role="columnheader">Email Address</div>
+                        <div role="columnheader">Address</div>
+                        <div role="columnheader">City</div>
+                        <div role="columnheader">State</div>
+                        <div role="columnheader">Zip</div>
+                    </div>
+                </section>
+                <section role="rowgroup"></section>
+            </div>
+        </div>
+        <script src="/index.js"></script>
+        <script>
+            const table = document.getElementById('root');
+            document.querySelector('[role="rowgroup"]:last-child').appendChild(generate(25));
+
+            const handlers = ColumnResize.columnResize(table, { th: '[role="columnheader"]' });
+
+            window.addEventListener('DOMContentLoaded', () => {
+                const t = document.getElementById('table-styles');
+                const b = document.getElementById('block-styles');
+
+                document.querySelector('button').onclick = () => {
+                    if (t.disabled) {
+                        b.setAttribute('disabled', 'disabled');
+                        t.removeAttribute('disabled');
+                    } else {
+                        t.setAttribute('disabled', 'disabled');
+                        b.removeAttribute('disabled');
+                    }
+                };
+
+                for (const handler in handlers) {
+                    table.addEventListener(handler, handlers[handler]);
+                }
+            });
+        </script>
+    </body>
+</html>

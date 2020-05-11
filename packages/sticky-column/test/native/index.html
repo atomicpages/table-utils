@@ -9,11 +9,12 @@
             }
             .wrapper {
                 height: 300px;
-                width: 400px;
+                /* UX defined min width of any page */
+                min-width: 400px;
                 overflow: auto;
             }
             table {
-                width: 100%;
+                /* width: 100%; */
                 border-collapse: collapse;
             }
             th {
@@ -84,14 +85,20 @@
             </table>
         </div>
         <script>
-            document.querySelector('tbody').appendChild(generate(20000, [0, 1, 2]));
-
-            // wait for DCL before executing
-            window.addEventListener('DOMContentLoaded', () => {
+            function apply() {
                 StickyColumn.stickyColumn(document.getElementById('root'), {
                     globalStylePrefix: 'scl',
                     selfAddClassName: true,
                 });
+            }
+
+            document.querySelector('tbody').appendChild(generate(100, [0, 1, 2]));
+
+            // wait for DCL before executing
+            window.addEventListener('DOMContentLoaded', apply);
+
+            window.addEventListener('resize', function () {
+                setTimeout(apply, 100);
             });
         </script>
     </body>

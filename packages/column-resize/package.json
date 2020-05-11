@@ -3,10 +3,10 @@
     "version": "0.0.1",
     "description": "",
     "scripts": {
-        "pretest": "cp pkg/dist-browser/* test/",
+        "pretest": "cp pkg/dist-browser/* pkg/assets/*.css* test/",
         "posttest": "rm test/*.js*",
         "test": "npm run posttest",
-        "build": "npm-run-all clean build:pika build:css",
+        "build": "npm-run-all clean build:* clean:css",
         "build:css": "sass --source-map -s compressed assets/resize.scss:assets/resize.css",
         "clean": "rimraf pkg/ && npm run clean:css",
         "clean:css": "rimraf assets/resize.css*",
@@ -35,7 +35,7 @@
                 {
                     "name": "ColumnResize",
                     "sourcemap": true,
-                    "minify": true
+                    "minify": false
                 }
             ],
             [

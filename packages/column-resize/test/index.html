@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Column Resize Demo</title>
+        <link rel="stylesheet" href="/resize.css" />
+        <script>
+            function generate(rows = 20) {
+                const start = new Date().getTime();
+                const fragment = document.createDocumentFragment();
+
+                for (let i = 0; i < rows; i++) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>John Doe</td>
+                        <td>42</td>
+                        <td>Male</td>
+                        <td>000-000-0000</td>
+                        <td>johndoe@foo.com</td>
+                        <td>123 Sleepytime Ln.</td>
+                        <td>San Francisco</td>
+                        <td>California</td>
+                        <td>12345</td>`;
+
+                    fragment.appendChild(tr);
+                }
+
+                console.log(
+                    `Took ${new Date().getTime() - start}ms to generate ${rows} rows of dummy data`
+                );
+
+                return fragment;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <table id="root">
+                <thead>
+                    <tr>
+                        <th><span>Name</span></th>
+                        <th><span>Age</span></th>
+                        <th><span>Gender</span></th>
+                        <th>Phone Number</th>
+                        <th>Email Address</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <script src="/index.js"></script>
+        <script>
+            const table = document.getElementById('root');
+            document.querySelector('tbody').appendChild(generate(25));
+
+            const handlers = ColumnResize.columnResize(table);
+
+            window.addEventListener('DOMContentLoaded', () => {
+                for (const handler in handlers) {
+                    table.addEventListener(handler, handlers[handler]);
+                }
+            });
+        </script>
+    </body>
+</html>

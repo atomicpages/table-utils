@@ -1,0 +1,23 @@
+[role='table'] {
+    display: table;
+}
+[role='rowgroup'] {
+    display: table-row-group;
+}
+[role='table'] section:first-child {
+    display: table-header-group;
+}
+[role='table'] section:last-child {
+    display: table-row-group;
+}
+[role='row'] {
+    display: table-row;
+}
+[role='columnheader'] {
+    font-weight: bold;
+    text-align: center;
+}
+[role='columnheader'],
+[role='cell'] {
+    display: table-cell;
+}
