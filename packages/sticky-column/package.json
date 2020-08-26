@@ -43,26 +43,28 @@
         "@pika/plugin-build-node": "^0.9.2",
         "@pika/plugin-build-web": "^0.9.2",
         "@pika/plugin-ts-standard-pkg": "^0.9.2",
-        "@testing-library/dom": "^7.5.1",
-        "@types/jest": "^25.2.1",
-        "@types/react": "^16.9.34",
-        "@types/react-dom": "^16.9.7",
-        "jest": "^25.5.4",
+        "@testing-library/dom": "^7.22.6",
+        "@types/jest": "^26.0.10",
+        "@types/react": "^16.9.47",
+        "@types/react-dom": "^16.9.8",
+        "jest": "^26.4.2",
         "npm-run-all": "^4.1.5",
-        "pika-plugin-legacy-browser": "^1.3.0",
+        "pika-plugin-legacy-browser": "^1.5.0",
         "rimraf": "^3.0.2",
-        "ts-jest": "^25.5.1",
-        "typescript": "^3.8.3"
+        "ts-jest": "^26.3.0",
+        "typescript": "^4.0.2"
     },
     "jest": {
         "preset": "ts-jest",
         "collectCoverage": true,
         "coverageDirectory": "<rootDir>/coverage",
-        "collectCoverageFrom": [
-            "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
-            "!**/node_modules/**",
-            "!**/__test__/**",
-            "!**/__mocks__/**"
+        "testPathIgnorePatterns": [
+            "/pkg/",
+            "/node_modules/"
+        ],
+        "coveragePathIgnorePatterns": [
+            "/pkg/",
+            "/node_modules/"
         ],
         "coverageReporters": [
             "html",
