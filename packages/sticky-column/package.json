@@ -9,6 +9,9 @@
         "build:pika": "pika build",
         "check:types": "tsc --noEmit"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "keywords": [
         "sticky",
         "table",

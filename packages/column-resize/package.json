@@ -2,6 +2,9 @@
     "name": "@table-utils/column-resize",
     "version": "0.0.1",
     "description": "",
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "pretest": "cp pkg/dist-browser/* pkg/assets/*.css* test/",
         "posttest": "rm test/*.js*",
