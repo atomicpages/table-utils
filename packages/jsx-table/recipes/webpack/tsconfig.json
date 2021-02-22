@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "downlevelIteration": true,
+        "target": "ES5",
+        "lib": ["DOM", "ES2015"],
+        "jsx": "preserve",
+        "paths": {
+            "@table-utils/jsx-table": ["../../src"]
+        }
+    }
+}

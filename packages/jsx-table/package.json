@@ -1,6 +1,6 @@
 {
     "name": "@table-utils/jsx-table",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "",
     "main": "dist-node/index.js",
     "module": "dist-web/index.js",

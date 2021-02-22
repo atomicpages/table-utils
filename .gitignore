@@ -1,4 +1,5 @@
 node_modules
 coverage
-test/react/**/*.js
 pkg
+dist
+test/react/**/*.js
