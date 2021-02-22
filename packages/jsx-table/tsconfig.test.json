@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "CommonJS",
+        "lib": ["ES2019", "DOM"],
+        "target": "ES2019"
+    },
+    "include": ["src", "src/table/__tests__"],
+}

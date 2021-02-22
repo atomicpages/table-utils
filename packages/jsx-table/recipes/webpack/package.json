@@ -1,0 +1,25 @@
+{
+    "name": "webpack",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.12.16",
+        "babel-loader": "^8.2.2",
+        "ts-loader": "^8.0.17",
+        "typescript": "^4.1.5",
+        "webpack": "^5.22.0"
+    },
+    "prettier": "../../node_modules/@djthoms/prettier-config",
+    "eslintConfig": {
+        "env": {
+            "node": true
+        }
+    }
+}
