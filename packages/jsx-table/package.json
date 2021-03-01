@@ -5,6 +5,9 @@
     "main": "dist-node/index.js",
     "module": "dist-web/index.js",
     "types": "dist-types/index.d.ts",
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "test": "npx jest",
         "lint": "eslint src --ext=ts,tsx",
