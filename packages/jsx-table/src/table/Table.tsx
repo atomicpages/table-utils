@@ -15,7 +15,7 @@ export type TableProps<
     P = any
 > = React.TableHTMLAttributes<E> & As<P> & Pick<Required<React.TableHTMLAttributes<E>>, 'children'>;
 
-type Statics = {
+export type Statics = {
     Body: typeof TableBody;
     Head: typeof TableHead;
     HeadRow: typeof TableHeadRow;
